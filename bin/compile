@@ -7,6 +7,7 @@ indent() {
 echo "-----> Installing linuxbrew"
 BUILD_DIR=$1
 VENDOR_DIR="vendor"
+youtube_dl="youtube-dl"
 
 git clone "https://github.com/Homebrew/linuxbrew.git" \
   "$HOME/.linuxbrew" 2>&1 | indent
@@ -31,6 +32,7 @@ for formula in $(cat "$BUILD_DIR/.cellar")
 do
   echo "-----> Installing $formula using brew"
   brew install $formula | indent
+  brew install $youtube_dl | indent
   if [ $? -ne 0 ]; then
     rm "$HOME/$VENDOR_DIR/linuxbrew"
     exit 1
